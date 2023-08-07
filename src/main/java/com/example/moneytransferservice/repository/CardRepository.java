@@ -6,6 +6,7 @@ import com.example.moneytransferservice.model.Amount;
 import com.example.moneytransferservice.model.Card;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
@@ -20,12 +21,7 @@ public class CardRepository {
     public CardRepository(Logger logger) {
         this.logger = logger;
         listCards = new ConcurrentHashMap<>();
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileInputStream(FOLDERPATH));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Properties properties = new Properties(Integer.parseInt(FOLDERPATH));
         addCard(properties);
     }
 

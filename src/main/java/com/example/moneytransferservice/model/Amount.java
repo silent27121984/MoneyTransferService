@@ -1,42 +1,9 @@
 package com.example.moneytransferservice.model;
 
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Setter;
 
-import java.util.Objects;
-
-public class Amount {
-    @Positive
-    private int value;
-
-    private final String currency;
-
-    public Amount(int value, String currency) {
-        this.value = value;
-        this.currency = currency;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Amount amount = (Amount) o;
-        return this.value == amount.value && Objects.equals(currency, amount.currency);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value, currency);
-    }
+@Setter
+public record Amount(@Min(0) Integer value, @NotBlank String currency){
 }

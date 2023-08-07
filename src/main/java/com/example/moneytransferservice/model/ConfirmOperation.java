@@ -1,24 +1,13 @@
 package com.example.moneytransferservice.model;
 
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.Pattern;
 
-
-@AllArgsConstructor
-public class ConfirmOperation {
-    @NotNull
-    private String operationId;
-
-    @NotNull
-    @Min(3)
-    private String code;
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getOperationId() {
-        return operationId;
-    }
+public record ConfirmOperation(
+        @NotBlank
+        @Pattern(regexp = "\\d{3}")
+        String operationId,
+        @NotNull
+        String code){
 }

@@ -1,5 +1,6 @@
 package com.example.moneytransferservice.model;
 
-public class TransferResult {
-    public String operationId;
+import java.util.concurrent.atomic.AtomicLong;
+
+public record TransferResult(AtomicLong operationId) {
 }

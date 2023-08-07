@@ -11,27 +11,29 @@ import com.example.moneytransferservice.exception.NotEnoughMoneyException;
 
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
+
     @ExceptionHandler(IncorrectDataEntry.class)
     public ResponseEntity<String> IncorrectDataHandler(IncorrectDataEntry e) {
         e.printStackTrace();
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
+
 
     @ExceptionHandler(ExceptionUnknownCard.class)
     public ResponseEntity<String> UnknownCardHandler(ExceptionUnknownCard e) {
         e.printStackTrace();
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 
     @ExceptionHandler(IncorrectCodeException.class)
     public ResponseEntity<String> IncorrectCodeHandler(IncorrectCodeException e) {
         e.printStackTrace();
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 
     @ExceptionHandler(NotEnoughMoneyException.class)
     public ResponseEntity<String> enoughMoneyHandler(NotEnoughMoneyException e) {
         e.printStackTrace();
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

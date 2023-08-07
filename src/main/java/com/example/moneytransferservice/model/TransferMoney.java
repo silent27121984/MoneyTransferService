@@ -1,40 +1,23 @@
 package com.example.moneytransferservice.model;
 
-import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import org.hibernate.validator.constraints.Length;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
-@AllArgsConstructor
-public class TransferMoney {
-    @NotEmpty
-    @Length(min = 16)
-    public String numberWriteOffCard;
-
-    @NotEmpty
-    @Length(min = 4)
-    public String numberCardValidTill;
-
-    @NotEmpty
-    @Length(min = 3)
-    public String numberCardCVV;
-
-    @NotEmpty
-    @Length(min = 16)
-    public String numberCardForEnrolment;
-
-    Amount amount;
-
-
-    public String getNumberWriteOffCard() {
-        return numberWriteOffCard;
-    }
-
-    public String getNumberCardForEnrolment() {
-        return numberCardForEnrolment;
-    }
-
-    public Amount getAmount() {
-        return amount;
-    }
+public record TransferMoney(
+        @NotBlank
+        @Pattern(regexp = "\\d{16}")
+        String numberWriteOffCard,
+        @NotBlank
+        @Pattern(regexp = "^(0[7-9]|1[0-2])/(2[3-9]|[3-9][0-9])$")
+        String numberCardValidTill,
+        @NotBlank
+        @Pattern(regexp = "\\d{3}")
+        String numberCardCVV,
+        @NotBlank
+        @Pattern(regexp = "\\d{16}")
+        String numberCardForEnrolment,
+        @NotNull
+        Amount amount) {
 
 }
